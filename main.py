@@ -7,6 +7,11 @@ from database import engine, get_db
 import random 
 from datetime import datetime, timedelta
 from twilio.rest import Client
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Create the database tables
 models.Base.metadata.create_all(bind=engine)
@@ -143,7 +148,6 @@ def predict_queue(appointment: schemas.AppointmentCreate, db: Session = Depends(
 
 # --- TWILIO SMS INTEGRATION ---
 # Load credentials from environment variables
-import os
 TWILIO_ACCOUNT_SID = os.getenv("TWILIO_ACCOUNT_SID", "")
 TWILIO_AUTH_TOKEN = os.getenv("TWILIO_AUTH_TOKEN", "")
 TWILIO_PHONE_NUMBER = os.getenv("TWILIO_PHONE_NUMBER", "+17744925982")
